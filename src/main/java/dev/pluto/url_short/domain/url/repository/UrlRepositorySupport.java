@@ -65,5 +65,4 @@ public class UrlRepositorySupport {
         }
         return resultDto.get(0);
     }
-
 }

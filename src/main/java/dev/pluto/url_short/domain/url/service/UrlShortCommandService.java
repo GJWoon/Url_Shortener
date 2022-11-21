@@ -17,13 +17,13 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.security.SecureRandom;
 
 @Service
 @RequiredArgsConstructor
 @Slf4j
 public class UrlShortCommandService {
     private final UrlRepository urlRepository;
-    private final PasswordEncoder passwordEncoder;
 
     @Transactional
     public Long shortingUrl(UrlCommandDto dto) {
@@ -57,14 +57,6 @@ public class UrlShortCommandService {
 
     // 패스워드 인코딩
     private String passwordEncode(String passwordEncode) {
-        return passwordEncoder.encode(passwordEncode);
-    }
-
-
-    private String getSalt() {
-        if (this.random != null) {
-            return BCrypt.gensalt(this.version.getVersion(), this.strength, this.random);
-        }
-        return BCrypt.gensalt(this.version.getVersion(), this.strength);
+        return  BCrypt.hashpw(passwordEncode,BCrypt.gensalt(15,new SecureRandom()));
     }
 }

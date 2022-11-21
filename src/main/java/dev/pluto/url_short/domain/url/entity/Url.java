@@ -31,7 +31,6 @@ public class Url {
     private String password;
     private long totalClickCount;
 
-
 //    @OneToMany(mappedBy = "urlId",fetch = FetchType.LAZY)
 //    private final List<AccessLog> accessLogList = new ArrayList<>();
 

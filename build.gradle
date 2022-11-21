@@ -2,6 +2,7 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '2.7.5'
 	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+	id 'com.ewerk.gradle.plugins.querydsl' version '1.0.10'
 }
 
 group = 'dev.pluto'
@@ -21,12 +22,44 @@ repositories {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-cache'
+	implementation group: 'javax.cache', name: 'cache-api', version: '1.1.1'
+	implementation group: 'org.hibernate', name: 'hibernate-jcache', version: '5.4.19.Final'
+	implementation group: 'org.ehcache', name: 'ehcache', version: '3.8.1'
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'com.mysql:mysql-connector-j'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+
+
+
+	//querydsl
+
+	//QueryDsl
+	implementation "com.querydsl:querydsl-jpa:5.0.0"
+	implementation "com.querydsl:querydsl-apt:5.0.0"
+	implementation "com.querydsl:querydsl-core:5.0.0"
+
 }
 
 tasks.named('test') {
 	useJUnitPlatform()
+}
+def querydslDir = "$buildDir/generated/querydsl"
+querydsl {
+	jpa = true
+	querydslSourcesDir = querydslDir
+}
+sourceSets {
+	main.java.srcDir querydslDir
+}
+compileQuerydsl{
+	options.annotationProcessorPath = configurations.querydsl
+}
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+	querydsl.extendsFrom compileClasspath
 }

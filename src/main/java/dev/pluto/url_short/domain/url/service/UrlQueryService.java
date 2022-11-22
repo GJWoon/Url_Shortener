@@ -17,11 +17,11 @@ import java.util.NoSuchElementException;
 public class UrlQueryService {
     private final UrlRepository urlRepository;
     private final UrlRepositorySupport urlRepositorySupport;
-    protected Url findById(Long urlId){
+    public Url findById(Long urlId){
         return urlRepository.findById(urlId)
                 .orElseThrow(NoSuchElementException::new);
     }
-    protected UrlDetailDto findUrlWithAccessLogByEncodedUrl(String encodedUrl){
+    public UrlDetailDto findUrlWithAccessLogByEncodedUrl(String encodedUrl){
         return urlRepositorySupport.findDetailUrlWithAccessLogByEncodedUrl(
                 encodedUrl);
     }

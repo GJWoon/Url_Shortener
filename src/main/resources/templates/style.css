@@ -1,0 +1,103 @@
+body {
+    font-family: 'Inter', sans-serif;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+header {
+    padding: 12px 64px;
+    background: #1D4ED8;
+}
+
+header > h1 {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 36px;
+    color: #FFFFFF;
+    margin: 0;
+}
+
+main {
+    margin: 0 64px 240px;
+}
+
+.input-title {
+    margin-top: 120px;
+    margin-bottom: 8px;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 28px;
+}
+
+.url-input {
+    display: block;
+    width: 100%;
+    border: 1px solid #9CA3AF;
+    border-radius: 4px;
+    padding: 8px 16px;
+    box-sizing: border-box;
+}
+
+.url-button {
+    padding: 8px 16px;
+    height: 40px;
+    background: #1D4ED8;
+    border-radius: 4px;
+    color: white;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 24px;
+    margin-top: 40px;
+}
+
+.cry-emoji {
+    font-size: 64px;
+    margin-top: 40px;
+}
+
+.error-message {
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 36px;
+    color: #374151;
+    margin-top: 40px;
+}
+
+.detail-section {
+    margin-top: 128px;
+}
+
+.section-title {
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 32px;
+    color: #374151;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 16px;
+    color: #374151;
+}
+
+table, th, td {
+    border: 1px solid #E5E7EB;
+    text-align: left;
+}
+
+th, td {
+    white-space: nowrap;
+    padding: 8px;
+}
+
+thead > tr {
+    background: #E5E7EB;
+}
+
+tr:nth-child(even) {
+    background: #F3F4F6;
+}

@@ -6,12 +6,12 @@ server:
       charset: UTF-8
       enabled: true
       force: true
-
 spring:
+
   datasource:
     url: jdbc:mysql://localhost:3306/url_shortener?serverTimezone=Asia/Seoul
     username: root
-    password: 9722
+    password: instiz
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     show-sql: true

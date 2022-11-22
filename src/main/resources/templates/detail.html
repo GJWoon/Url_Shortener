@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link rel="stylesheet" href="normalize.css">
+        <link rel="stylesheet" href="style.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link
+            rel="preconnect"
+            href="https://fonts.gstatic.com"
+            crossorigin="crossorigin">
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap"
+            rel="stylesheet">
+        <title>Pluto Backend Assignment</title>
+    </head>
+
+    <body>
+        <header>
+            <h1>Short URL Generator</h1>
+        </header>
+        <main>
+            <div class="detail-section">
+                <div class="section-title">URL Details</div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Description</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Destination URL</td>
+                                <td id="original_url">/</td>
+                            </tr>
+                            <tr>
+                                <td>Short URL</td>
+                                <td id="short_url"></td>
+                            </tr>
+                            <tr>
+                                <td>Created At</td>
+                                <td id="create_at"></td>
+                            </tr>
+                            <tr>
+                                <td>Total Clicks</td>
+                                <td id="total_click"></td>
+                            </tr>
+                            <tr>
+                                <td>Last Clicked At</td>
+                                <td id="last_click_at"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="detail-section">
+                    <div class="section-title">Access Logs</div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>IP</th>
+                                <th>User Agent</th>
+                                <th>Referrer</th>
+                                <th>Clicked At</th>
+                            </thead>
+                            <tbody id="access_log_body">
+                            </tbody>
+                        </table>
+                    </div>
+                </main>
+            </body>
+            <script type="text/javascript" src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
+            <script>
+                $(document).ready(function () {
+                    var url_href = window.location.href;
+                    var url = new URL(url_href);
+                    var shortUrl = url
+                        .searchParams
+                        .get("url");
+                    $.ajax({
+                        type: "GET",
+                        url: "https://www.june.pe.kr/" + shortUrl + "/detail",
+                        dataType: 'text',
+                        success: function (result) {
+                            var data = JSON.parse(result);
+                            $("#original_url").text(data.data.destinationUrl);
+                            $("#short_url").text("june.pe.kr/"+data.data.shortUrl);
+                            $("#create_at").text(data.data.createdAt);
+                            $("#total_click").text(data.data.totalClickCount);
+                            $("#last_click_at").text(data.data.lastClickedAt);
+
+                            var accessLogDetailDtoList = data.data.accessLogDetailDtoList;
+                            $(accessLogDetailDtoList).each(function(){
+                                appendAccessLog(this);
+                            });
+                            
+                        },
+                        error: function () {
+                            //에러가 났을 경우 실행시킬 코드
+                        }
+                    })
+                });
+
+                function appendAccessLog(data) {
+                    $("#access_log_body").append(
+                        "<tr> <td>" + data.userIp + "</td> <td>" + data.userAgent + "</td> <td>" +
+                        data.referer + "</td> <td>" + data.createAt + "</td> </tr>"
+                    )
+                }
+            </script>
+        </html>

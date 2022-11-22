@@ -4,6 +4,7 @@ package dev.pluto.url_short.domain.url.service;
 import dev.pluto.url_short.domain.url.dto.UrlCommandDto;
 import dev.pluto.url_short.domain.url.entity.Url;
 import dev.pluto.url_short.domain.url.repository.UrlRepository;
+import dev.pluto.url_short.domain.url.utill.PasswordEncoding;
 import dev.pluto.url_short.domain.url.utill.UrlEncoding;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -25,22 +26,18 @@ import java.security.SecureRandom;
 public class UrlShortCommandService {
     private final UrlRepository urlRepository;
 
-    @Transactional
-    public Long shortingUrl(UrlCommandDto dto) {
+    private final PasswordEncoding passwordEncoding;
+    public String shortingUrl(String destinationUrl,String password) {
 
-        String destinationUrl = dto.getDestinationUrl();
-
-        // URL Get 요청 후 정상적으로 요청이 되는지 확인
         checkAvailUrl(destinationUrl);
         // 비밀번호 인코딩 로직 추가
-        Url url = Url.create(destinationUrl, passwordEncode(dto.getPassword()));
-
+        Url url = Url.create(destinationUrl,passwordEncoding.pwEncode(password));
         //저장 후 인코딩 url update
         urlRepository.save(url).setShortUrl(UrlEncoding.urlEncoder(url.getId()));
 
         url.setShortUrl(UrlEncoding.urlEncoder(url.getId()));
 
-        return url.getId();
+        return url.getShortUrl();
     }
 
     // 사용자가 입력한 URL으로 GET요청 후 정상적인 URL인지 검증
@@ -53,10 +50,5 @@ public class UrlShortCommandService {
         } catch (IOException e) {
             throw new IllegalArgumentException();
         }
-    }
-
-    // 패스워드 인코딩
-    private String passwordEncode(String passwordEncode) {
-        return  BCrypt.hashpw(passwordEncode,BCrypt.gensalt(15,new SecureRandom()));
     }
 }

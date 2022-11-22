@@ -10,8 +10,6 @@ public class UrlEncoding {
 
     private final static int BASE = 62;
     private final static String BASE_CHAR = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-
-
     private static StringBuilder encoding(long param) {
         StringBuilder sb = new StringBuilder();
         while(param > 0) {
@@ -21,7 +19,7 @@ public class UrlEncoding {
         return sb;
     }
 
-    private long decoding(String param) {
+    private static long decoding(String param) {
         long sum = 0;
         long power = 1;
         for (int i = 0; i < param.length(); i++) {
@@ -33,17 +31,11 @@ public class UrlEncoding {
 
     //신퀀스를 인코딩
     public static String urlEncoder(Long urlId){
-        String encodeStr = String.valueOf(encoding(urlId));
-        log.info("base62 encode result:" + encodeStr);
-        return encodeStr;
+        return String.valueOf(encoding(urlId));
     }
-
     //디코딩
-    public long urlDecoder(String encodeStr){
-
-        long decodeVal = decoding(encodeStr);
-        log.info("base62 decode result:" + decodeVal);
-        return decodeVal;
+    public static long urlDecoder(String encodeStr){
+        return decoding(encodeStr);
     }
 
 }

@@ -36,12 +36,15 @@ public class UrlFacadeService {
     //인코딩된 URL을 디코딩후 반환
     @Transactional
     public String getDestination_url(String encodedUrl, HttpServletRequest servletRequest) {
-        Url url = urlQueryService.findById(
-                UrlEncoding.urlDecoder(encodedUrl)
-        );
+
+        Url url = urlQueryService.findByEncodedUrl(encodedUrl);
+
         url.clickUrl();
+
         accessLogService.commandAccessLog(servletRequest, url);
+
         return url.getDestinationUrl();
+
     }
 
     //URL의 detail 정보와 accesslog 조회
@@ -54,9 +57,7 @@ public class UrlFacadeService {
     @Transactional(readOnly = true)
     public String checkPw(UrlCommandDto dto) {
 
-        Url url = urlQueryService.findById(
-                UrlEncoding.urlDecoder(dto.getUrl())
-        );
+        Url url = urlQueryService.findByEncodedUrl(dto.getUrl());
 
         passwordEncoding.matchPw(dto.getPassword(), url.getPassword());
 

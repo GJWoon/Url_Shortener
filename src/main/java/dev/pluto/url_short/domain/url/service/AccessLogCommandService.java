@@ -34,9 +34,7 @@ public class AccessLogCommandService {
         return new AccessLogDto(
                 getClientIP(httpServletRequest),
                 httpServletRequest.getHeader("USER-AGENT"),
-                httpServletRequest.getHeader("Referer") == null ?
-                        httpServletRequest.getHeader("referer") :
-                        httpServletRequest.getHeader("Referer")
+                httpServletRequest.getHeader("Referer")
         );
     }
 

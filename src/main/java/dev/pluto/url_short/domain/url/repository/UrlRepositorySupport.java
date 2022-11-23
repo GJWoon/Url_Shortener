@@ -5,22 +5,19 @@ import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import dev.pluto.url_short.domain.url.dto.AccessLogDetailDto;
 import dev.pluto.url_short.domain.url.dto.UrlDetailDto;
+import dev.pluto.url_short.global.exception.BusinessException;
+import dev.pluto.url_short.global.model.ErrorCode;
 import lombok.RequiredArgsConstructor;
-import org.ehcache.impl.internal.store.offheap.BasicOffHeapValueHolder;
 import org.springframework.stereotype.Repository;
 
 import static com.querydsl.core.group.GroupBy.groupBy;
 import static com.querydsl.core.group.GroupBy.list;
 
-import static com.querydsl.core.types.dsl.Expressions.list;
 import static dev.pluto.url_short.domain.url.entity.QUrl.url;
 import static dev.pluto.url_short.domain.url.entity.QAccessLog.accessLog;
 
-import java.nio.BufferOverflowException;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.Optional;
 
 @RequiredArgsConstructor
 @Repository
@@ -61,7 +58,7 @@ public class UrlRepositorySupport {
                                 )
                 );
         if (resultDto.isEmpty()) {
-            throw new NoSuchElementException();
+            throw new BusinessException(ErrorCode.NOT_FOUND_URL);
         }
         return resultDto.get(0);
     }

@@ -23,6 +23,7 @@ public class Url {
     private Long id;
 
     private String destinationUrl;
+    @Column(unique = true)
     private String shortUrl;
 
     private LocalDateTime createdAt;

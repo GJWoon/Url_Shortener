@@ -33,6 +33,7 @@ dependencies {
 
 	//security
 	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: '2.4.5'
+	implementation 'io.jsonwebtoken:jjwt:0.9.1'
 
 	//QueryDsl
 	implementation "com.querydsl:querydsl-jpa:5.0.0"

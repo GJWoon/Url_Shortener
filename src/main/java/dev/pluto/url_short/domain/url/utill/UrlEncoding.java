@@ -29,7 +29,7 @@ public class UrlEncoding {
         return sum;
     }
 
-    //신퀀스를 인코딩
+    //PK를 인코딩
     public static String urlEncoder(Long urlId){
         return String.valueOf(encoding(urlId));
     }

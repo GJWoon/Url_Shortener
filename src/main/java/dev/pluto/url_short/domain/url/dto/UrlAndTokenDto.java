@@ -6,7 +6,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class UrlReturnDto {
-
+public class UrlAndTokenDto {
     private final String url;
+    private final String token;
 }

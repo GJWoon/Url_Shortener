@@ -1,5 +1,6 @@
 package dev.pluto.url_short.global.config;
 
+import dev.pluto.url_short.global.interceptor.AccessLogInterceptor;
 import dev.pluto.url_short.global.interceptor.HttpLoggerInterceptor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
@@ -12,6 +13,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @RequiredArgsConstructor
 public class WebConfig implements WebMvcConfigurer {
     private final HttpLoggerInterceptor interceptor;
+    private final AccessLogInterceptor accessLogInterceptor;
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/**")
@@ -22,13 +24,16 @@ public class WebConfig implements WebMvcConfigurer {
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
                 .allowedOrigins("*")
-                .allowedMethods("*");
+                .allowedHeaders("*")
+                .allowedMethods("*")
+                ;
     }
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(interceptor)
                 .addPathPatterns("/**");
-
+        registry.addInterceptor(accessLogInterceptor)
+                .addPathPatterns("/api/**/detail");
     }
 
 }

@@ -3,6 +3,7 @@ package dev.pluto.url_short.domain.url.controller;
 import dev.pluto.url_short.domain.url.service.facade.UrlFacadeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 

@@ -9,9 +9,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UrlCommandDto {
-
     private String url;
-
     private String password;
-
 }

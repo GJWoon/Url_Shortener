@@ -10,17 +10,17 @@ import java.util.List;
 @AllArgsConstructor
 public class UrlDetailDto {
 
-    private Long id;
+    private final Long id;
 
-    private String destinationUrl;
+    private final String destinationUrl;
 
-    private String shortUrl;
+    private final String shortUrl;
 
-    private LocalDateTime createdAt;
+    private final LocalDateTime createdAt;
 
-    private LocalDateTime lastClickedAt;
+    private final LocalDateTime lastClickedAt;
 
-    private long totalClickCount;
+    private final  long totalClickCount;
 
-    private List<AccessLogDetailDto> accessLogDetailDtoList;
+    private final List<AccessLogDetailDto> accessLogDetailDtoList;
 }

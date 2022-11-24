@@ -9,7 +9,7 @@ spring:
   datasource:
     url: jdbc:mysql://localhost:3306/url_shortener?serverTimezone=Asia/Seoul
     username: root
-    password: instiz
+    password: 9722
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     show-sql: true
@@ -28,3 +28,5 @@ spring:
           region:
             factory_class: org.hibernate.cache.jcache.internal.JCacheRegionFactory
         format_sql: true
+  jwt:
+    secret: june970617

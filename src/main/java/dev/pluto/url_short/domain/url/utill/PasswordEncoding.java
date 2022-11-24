@@ -21,7 +21,7 @@ public class PasswordEncoding {
 
     public void matchPw(String password, String hashPassword) {
         if (!passwordEncoder.matches(password, hashPassword)) {
-            throw new BusinessException(ErrorCode.FORBIDDEN);
+            throw new BusinessException(ErrorCode.NOT_MATCH_PW);
         }
     }
 }

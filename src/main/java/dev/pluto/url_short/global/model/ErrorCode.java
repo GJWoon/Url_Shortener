@@ -3,6 +3,10 @@ package dev.pluto.url_short.global.model;
 public enum ErrorCode {
 
     NOT_FOUND_URL(404, "C004", "URL을 찾을 수 없습니다."),
+
+    NOT_MATCH_PW(403, "C004", "비밀번호를 확인해 주세요."),
+
+
     NOT_EFFECTIVE_URL(409, "C004", "유효한 URL이 아닙니다."),
     FORBIDDEN(403, "C004", "권한이 없습니다."),
 

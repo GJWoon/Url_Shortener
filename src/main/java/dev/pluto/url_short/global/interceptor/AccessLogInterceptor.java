@@ -37,7 +37,7 @@ public class AccessLogInterceptor implements HandlerInterceptor {
         String url  = tokenProvider.getUrl();
 
         if(!requestUrl.equals(url)){
-            throw new BusinessException(ErrorCode.NOT_FOUND_URL);
+            throw new BusinessException(ErrorCode.FORBIDDEN);
         }
         return HandlerInterceptor.super.preHandle(request, response, handler);
     }

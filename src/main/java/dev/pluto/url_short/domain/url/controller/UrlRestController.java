@@ -10,25 +10,20 @@ import dev.pluto.url_short.global.model.HttpStatus;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api")
 public class UrlRestController {
     private final UrlFacadeService urlFacadeService;
     @PostMapping()
-    public ApiResponse<UrlAndTokenDto> encoding(@RequestBody UrlCommandDto dto) {
+    public ApiResponse<UrlAndTokenDto> encoding(@RequestBody @Valid UrlCommandDto dto) {
         return new ApiResponse<>(HttpStatus.SUCCESS, urlFacadeService.shortingUrl(dto));
     }
     @GetMapping("/{url}/detail")
     public ApiResponse<UrlDetailDto> getUrlDetail(@PathVariable String url) {
         return new ApiResponse<>(HttpStatus.SUCCESS, urlFacadeService.findUrlWithAccessLogById(url));
     }
-    @PostMapping("/auth/pw")
-    public ApiResponse<UrlAndTokenDto> checkPassword(@RequestBody UrlCommandDto dto) {
-        return new ApiResponse<>(HttpStatus.SUCCESS, urlFacadeService.checkPw(dto) );
-    }
-    @GetMapping("/auth/token/{url}")
-    public ApiResponse<Boolean> checkPassword(@PathVariable String url) {
-        return new ApiResponse<>(HttpStatus.SUCCESS,urlFacadeService.checkToken(url));
-    }
+
 }

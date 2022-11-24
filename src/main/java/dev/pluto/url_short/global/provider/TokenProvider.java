@@ -55,7 +55,6 @@ public class TokenProvider {
         // 헤더에서 JWT 추출
         String accessToken = getJwt();
 
-        System.out.println(accessToken);
         if(accessToken == null || accessToken.length() == 0){
             throw new BusinessException(ErrorCode.FORBIDDEN);
         }

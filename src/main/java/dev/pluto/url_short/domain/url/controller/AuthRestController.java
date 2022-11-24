@@ -25,5 +25,6 @@ public class AuthRestController {
     @GetMapping("/auth/token/{url}")
     public ApiResponse<Boolean> checkPassword(@PathVariable String url) {
         return new ApiResponse<>(HttpStatus.SUCCESS,urlFacadeService.checkToken(url));
+
     }
 }

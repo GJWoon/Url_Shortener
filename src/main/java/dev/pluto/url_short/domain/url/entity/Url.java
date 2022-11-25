@@ -11,7 +11,6 @@ import java.time.LocalDateTime;
 @Builder
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Cacheable
 public class Url {
 
     @Id

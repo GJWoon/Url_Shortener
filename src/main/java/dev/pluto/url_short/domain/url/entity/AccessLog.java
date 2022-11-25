@@ -2,6 +2,7 @@ package dev.pluto.url_short.domain.url.entity;
 
 
 import dev.pluto.url_short.domain.url.dto.AccessLogDto;
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
@@ -13,13 +14,14 @@ import java.time.LocalDateTime;
 @Table(name = "t_access_log")
 @Builder
 @AllArgsConstructor
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class AccessLog {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private String ip;
 
     private String userAgent;
@@ -30,7 +32,8 @@ public class AccessLog {
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Url url;
-    public AccessLog create(AccessLogDto dto,Url url){
+
+    public static AccessLog create(AccessLogDto dto,Url url){
         return AccessLog.builder()
                 .ip(dto.getUserIp())
                 .clickedAt(LocalDateTime.now())

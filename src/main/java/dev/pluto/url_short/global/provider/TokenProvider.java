@@ -35,6 +35,8 @@ public class TokenProvider {
     }
 
     public String createJwt(String url) {
+
+        System.out.println(secretKey);
         Date now = new Date();
         return Jwts.builder()
                 .setHeaderParam("type", "jwt")

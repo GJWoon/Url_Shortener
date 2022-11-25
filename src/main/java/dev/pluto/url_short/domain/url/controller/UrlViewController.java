@@ -1,9 +1,8 @@
 package dev.pluto.url_short.domain.url.controller;
 
-import dev.pluto.url_short.domain.url.service.facade.UrlFacadeService;
+import dev.pluto.url_short.domain.url.service.UrlQueryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -14,9 +13,9 @@ import javax.servlet.http.HttpServletRequest;
 @RequiredArgsConstructor
 public class UrlViewController {
 
-    private final UrlFacadeService urlFacadeService;
+    private final UrlQueryService urlQueryService;
     @GetMapping(value = {"/{url}"})
     public String redirectUrl(@PathVariable() String url, HttpServletRequest httpServletRequest) {
-        return "redirect:"+urlFacadeService.getDestination_url(url,httpServletRequest);
+        return "redirect:"+urlQueryService.getDestination_url(url,httpServletRequest);
      }
 }

@@ -1,7 +1,6 @@
 package dev.pluto.url_short.domain.url.dto;
 
 import lombok.Getter;
-import lombok.Setter;
 
 import java.time.LocalDateTime;
 

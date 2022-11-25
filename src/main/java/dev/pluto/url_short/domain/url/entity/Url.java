@@ -2,19 +2,15 @@ package dev.pluto.url_short.domain.url.entity;
 
 
 import lombok.*;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table(name = "t_url")
 @AllArgsConstructor
 @Builder
 @Getter
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Cacheable
 public class Url {
 
@@ -22,13 +18,14 @@ public class Url {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(length = 2083,nullable = false)
     private String destinationUrl;
-    @Column(unique = true)
     private String shortUrl;
 
     private LocalDateTime createdAt;
     private LocalDateTime lastClickedAt;
 
+    @Column(nullable = false)
     private String password;
     private long totalClickCount;
 

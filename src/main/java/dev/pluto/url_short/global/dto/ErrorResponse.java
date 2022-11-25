@@ -13,18 +13,15 @@ public class ErrorResponse {
 
     private String message;
     private int status;
-    private String code;
 
     public ErrorResponse(final ErrorCode code) {
         this.message = code.getMessage();
         this.status = code.getStatus();
-        this.code = code.getCode();
     }
 
     public ErrorResponse(String message,int status,String code) {
         this.message = message;
         this.status = status;
-        this.code = code;
     }
 
     public static ErrorResponse of(final ErrorCode code) {

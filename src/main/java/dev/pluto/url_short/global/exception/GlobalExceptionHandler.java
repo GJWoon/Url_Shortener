@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.servlet.ModelAndView;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
@@ -20,8 +21,14 @@ public class GlobalExceptionHandler {
     }
     @ExceptionHandler(MethodArgumentNotValidException.class)
     protected ResponseEntity<ErrorResponse> handleException(final MethodArgumentNotValidException e) {
-       System.out.println(e.getMessage());
         final ErrorResponse response = new ErrorResponse(e.getBindingResult().getAllErrors().get(0).getDefaultMessage(),400,"B001");
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(NotFoundUrlException.class)
+    protected ModelAndView handleException(final NotFoundUrlException e) {
+        return new ModelAndView("redirect:/error");
+    }
 }
+
+

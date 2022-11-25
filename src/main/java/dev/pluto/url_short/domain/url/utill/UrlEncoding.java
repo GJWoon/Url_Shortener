@@ -2,6 +2,7 @@ package dev.pluto.url_short.domain.url.utill;
 
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -9,10 +10,15 @@ import org.springframework.stereotype.Component;
 public class UrlEncoding {
 
     private final static int BASE = 62;
-    private final static String BASE_CHAR = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    public static String BASE_CHAR;
+    @Value("${app.base62}")
+    public void setBaseChar(String value) {
+        BASE_CHAR = value;
+    }
+
     private static StringBuilder encoding(long param) {
         StringBuilder sb = new StringBuilder();
-        while(param > 0) {
+        while (param > 0) {
             sb.append(BASE_CHAR.charAt((int) (param % BASE)));
             param /= BASE;
         }

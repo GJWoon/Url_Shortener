@@ -17,7 +17,6 @@ import static dev.pluto.url_short.domain.url.entity.QUrl.url;
 import static dev.pluto.url_short.domain.url.entity.QAccessLog.accessLog;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 
 @RequiredArgsConstructor
 @Repository

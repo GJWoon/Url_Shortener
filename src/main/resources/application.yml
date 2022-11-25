@@ -5,18 +5,21 @@ server:
       charset: UTF-8
       enabled: true
       force: true
+  error:
+    whitelabel:
+      enabled: false
 spring:
   datasource:
     url: jdbc:mysql://localhost:3306/url_shortener?serverTimezone=Asia/Seoul
-    username: root
-    password: 9722
+    username:
+    password:
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     show-sql: true
     open-in-view: true
     generate-ddl: true
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
     properties:
       javax:
         persistence:
@@ -30,3 +33,6 @@ spring:
         format_sql: true
   jwt:
     secret: june970617
+
+app:
+  base62: BeRj8vjdB2of1FV6GV2gqb00igp3cvp0PCGZ3WVvE2v7G81KeP7Xro14uxfFZ7

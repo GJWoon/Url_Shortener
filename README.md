@@ -35,8 +35,29 @@ after - https://june.pe.kr/n
 <br>
 
 ## 구현 기능
+>URL Shorting
 
-### 기능 1
+<img width="1725" alt="image" src="https://user-images.githubusercontent.com/72774518/204212090-739a7bbc-f8f6-41c5-88bb-033b7f14cfab.png">
+
+* base62를 사용하여 PK를 인코딩해서 Short Url로 사용
+```groovy
+
+    public static String encode(Long id) {
+        StringBuilder shortURL = new StringBuilder("");
+        while (id > 0) {
+            shortURL.append(BASE62[(int) (id % 62)]);
+            id /= 62;
+        }
+        return shortURL.reverse().toString();
+    }
+
+
+    urlRepository.save(url).setShortUrl(UrlEncoding.encode(url.getId()));
+
+```
+원본 URL - https://www.google.com/search?q=%EA%B9%83%ED%97%88%EB%B8%8C&oq=%EA%B9%83%ED%97%88%EB%B8%8C&aqs=chrome..69i57j46i131i199i433i465i512j0i131i433i512l3j0i512l2j69i60.2235j0j4&sourceid=chrome&ie=UTF-8
+
+Short URL - https://june.pe.kr/u
 
 ### 기능 2
 

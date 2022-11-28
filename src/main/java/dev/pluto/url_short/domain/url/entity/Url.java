@@ -19,6 +19,7 @@ public class Url {
 
     @Column(length = 2083,nullable = false)
     private String destinationUrl;
+    @Column(columnDefinition = "varchar(1) BINARY")
     private String shortUrl;
 
     private LocalDateTime createdAt;

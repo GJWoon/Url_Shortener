@@ -105,7 +105,7 @@ public class UrlQueryService {
     }
 
     private Url findByEncodedUrl(String url) {
-        return urlRepository.findById(UrlEncoding.urlDecoder(url))
+        return urlRepository.findById(UrlEncoding.decode(url))
                 .orElseThrow(() -> new NotFoundUrlException(ErrorCode.NOT_FOUND_URL));
     }
 }

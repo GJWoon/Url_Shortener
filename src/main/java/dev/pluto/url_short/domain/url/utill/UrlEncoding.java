@@ -2,46 +2,37 @@ package dev.pluto.url_short.domain.url.utill;
 
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
 @Slf4j
 public class UrlEncoding {
-
-    private final static int BASE = 62;
-    public static String BASE_CHAR;
-    @Value("${app.base62}")
-    public void setBaseChar(String value) {
-        BASE_CHAR = value;
-    }
-
-    private static StringBuilder encoding(long param) {
-        StringBuilder sb = new StringBuilder();
-        while (param > 0) {
-            sb.append(BASE_CHAR.charAt((int) (param % BASE)));
-            param /= BASE;
+    private static final char[] BASE62 = "abcdefghijklmnopqrstuvwxyz1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray();
+    public static String encode(Long id) {
+        StringBuilder shortURL = new StringBuilder("");
+        while (id > 0) {
+            shortURL.append(BASE62[(int) (id % 62)]);
+            id /= 62;
         }
-        return sb;
+        return shortURL.reverse().toString();
     }
 
-    private static long decoding(String param) {
-        long sum = 0;
-        long power = 1;
-        for (int i = 0; i < param.length(); i++) {
-            sum += BASE_CHAR.indexOf(param.charAt(i)) * power;
-            power *= BASE;
+    public static Long decode(String str) {
+        Long id = 0L;
+
+        for (int i = 0; i < str.length(); i++) {
+            char ch = str.charAt(i);
+            if ('a' <= ch && ch <= 'z') {
+                id = id * 62 + ch - 'a';
+            } else if ('A' <= ch && ch <= 'Z') {
+                id = id * 62 + ch - 'A' + 36;
+            } else if ('0' <= ch && ch <= '9') {
+                id = id * 62 + ch - '0' + 26;
+            }
         }
-        return sum;
-    }
-
-    //PK를 인코딩
-    public static String urlEncoder(Long urlId){
-        return String.valueOf(encoding(urlId));
-    }
-    //디코딩
-    public static long urlDecoder(String encodeStr){
-        return decoding(encodeStr);
+        return id;
     }
 
 }
+
+

@@ -26,6 +26,8 @@ public class UrlRepositorySupport {
 
     public UrlDetailDto findDetailUrlWithAccessLogByEncodedUrl(String encodedUrl) {
 
+
+
         List<UrlDetailDto> resultDto = queryFactory
                 .from(url)
                 .leftJoin(accessLog)

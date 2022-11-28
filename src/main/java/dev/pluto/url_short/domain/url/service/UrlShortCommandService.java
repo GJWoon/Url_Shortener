@@ -30,7 +30,12 @@ public class UrlShortCommandService {
 
         final Url url = Url.create(dto.getUrl(), PasswordEncoding.pwEncode(dto.getPassword()));
 
-        urlRepository.save(url).setShortUrl(UrlEncoding.urlEncoder(url.getId()));
+
+
+        urlRepository.save(url).setShortUrl(UrlEncoding.encode(url.getId()));
+
+
+        System.out.println(url.getId());
 
         return tokenProvider.createJwtDto(url.getShortUrl());
 

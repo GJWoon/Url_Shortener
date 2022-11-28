@@ -17,14 +17,12 @@ https://url.kr/ <br>
 
 위 사이트와 같이 길고 못생긴 Url들을 짧고 이쁘게 만드는 Url_Shortener 사이트 입니다! <br>
 
-ex) <br>
+ex) <br><br>
 before - https://search.naver.com/search.naver?where=nexearch&sm=top_hty&fbm=0&ie=utf8&query=url+%EC%A4%84%EC%9D%B4%EA%B8%B0 <br>
-after - june.pe.kr/n
+
+after - https://june.pe.kr/n
 </p>
 
-<p align="center">
-GIF Images
-</p>
 
 <br>
 

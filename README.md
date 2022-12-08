@@ -26,16 +26,6 @@ after - https://june.pe.kr/n
 </p>
 
 
-<br>
-
-## 기술 스택
-
-| JavaScript | TypeScript |  React   |  Node   |
-| :--------: | :--------: | :------: | :-----: |
-|   ![js]    |   ![ts]    | ![react] | ![node] |
-
-<br>
-
 ## 구현 기능
 * ### URL Shorting
 
